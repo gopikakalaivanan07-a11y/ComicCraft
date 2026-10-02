@@ -3,3 +3,5 @@ env/
 *.7z
 __pycache__/
 *.pyc
+static/panels/
+static/exports/
