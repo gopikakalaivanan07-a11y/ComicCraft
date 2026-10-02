@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <p class="eyebrow">
+            GENERATIVE AI PROJECT
+        </p>
+
+        <h1>
+            Turn your idea into a comic.
+        </h1>
+
+        <p class="hero-text">
+
+            Enter your story idea and preferences.
+            ComicCraft creates a five-panel story,
+            dialogue, illustrations and a downloadable PDF.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+{% if error %}
+
+<div class="alert error">
+
+    <strong>
+        Generation failed:
+    </strong>
+
+    {{ error }}
+
+    <p>
+
+        For the first test, make sure your
+        <code>.env</code> contains:
+
+    </p>
+
+    <code>
+        IMAGE_PROVIDER=placeholder
+    </code>
+
+</div>
+
+{% endif %}
+
+
+<form
+    class="card form-card"
+    action="/generate"
+    method="post"
+>
+
+
+    <label for="story_prompt">
+        Story Prompt
+    </label>
+
+    <textarea
+        id="story_prompt"
+        name="story_prompt"
+        rows="5"
+        required
+        placeholder="Example: A brave fox explores an enchanted forest and discovers a hidden library."
+    >{{ form.story_prompt if form else "" }}</textarea>
+
+
+    <div class="grid-2">
+
+
+        <div>
+
+            <label for="character_name">
+                Main Character Name
+            </label>
+
+            <input
+                id="character_name"
+                name="character_name"
+                required
+                value="{{ form.character_name if form else '' }}"
+                placeholder="Foxy"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label for="setting">
+                Setting
+            </label>
+
+            <select
+                id="setting"
+                name="setting"
+            >
+
+                <option>
+                    Enchanted forest
+                </option>
+
+                <option>
+                    School
+                </option>
+
+                <option>
+                    Space
+                </option>
+
+                <option>
+                    Future city
+                </option>
+
+                <option>
+                    Underwater world
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label for="tone">
+                Story Tone
+            </label>
+
+            <select
+                id="tone"
+                name="tone"
+            >
+
+                <option>
+                    Funny
+                </option>
+
+                <option>
+                    Light-hearted
+                </option>
+
+                <option>
+                    Dramatic
+                </option>
+
+                <option>
+                    Poetic
+                </option>
+
+                <option>
+                    Adventure
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div>
+
+            <label for="art_style">
+                Art Style
+            </label>
+
+            <select
+                id="art_style"
+                name="art_style"
+            >
+
+                <option>
+                    Comic book
+                </option>
+
+                <option>
+                    Anime
+                </option>
+
+                <option>
+                    Pixel art
+                </option>
+
+                <option>
+                    Watercolor
+                </option>
+
+                <option>
+                    Realistic
+                </option>
+
+            </select>
+
+        </div>
+
+
+    </div>
+
+
+    <button
+        class="primary-btn"
+        type="submit"
+    >
+
+        ✨ Generate My Comic
+
+    </button>
+
+
+</form>
+
+
+<section class="info-grid">
+
+
+    <div class="mini-card">
+
+        <strong>1.</strong>
+
+        <span>
+            Gemini creates the five-panel outline.
+        </span>
+
+    </div>
+
+
+    <div class="mini-card">
+
+        <strong>2.</strong>
+
+        <span>
+            Gemini creates narration and dialogue.
+        </span>
+
+    </div>
+
+
+    <div class="mini-card">
+
+        <strong>3.</strong>
+
+        <span>
+            Stable Diffusion creates the artwork.
+        </span>
+
+    </div>
+
+
+    <div class="mini-card">
+
+        <strong>4.</strong>
+
+        <span>
+            FPDF exports the complete comic.
+        </span>
+
+    </div>
+
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-heading">
+
+    <p class="eyebrow">
+        YOUR GENERATED COMIC
+    </p>
+
+    <h1>
+        {{ comic.character_name }}'s Story
+    </h1>
+
+    <p>
+        {{ comic.story_prompt }}
+    </p>
+
+</div>
+
+
+<div class="action-row">
+
+    <a
+        class="primary-btn"
+        href="/export/{{ comic.comic_id }}"
+    >
+        ⬇ Download Your Comic as PDF
+    </a>
+
+
+    <a
+        class="secondary-btn"
+        href="/export-success/{{ comic.comic_id }}"
+    >
+        View Export Success
+    </a>
+
+
+    <a
+        class="secondary-btn"
+        href="/"
+    >
+        Create Another
+    </a>
+
+</div>
+
+
+<div class="comic-grid">
+
+{% for panel in preview_panels %}
+
+<article class="panel-card">
+
+
+    <div class="panel-title">
+
+        Panel {{ panel.panel_number }}:
+        {{ panel.title }}
+
+    </div>
+
+
+    <img
+        src="{{ panel.image_url }}"
+        alt="{{ panel.title }}"
+        class="panel-image"
+    >
+
+
+    <div class="panel-body">
+
+
+        <p class="scene">
+
+            <em>
+                {{ panel.scene_description }}
+            </em>
+
+        </p>
+
+
+        <div class="text-block">
+
+            <strong>
+                Caption
+            </strong>
+
+            <p>
+                {{ panel.caption }}
+            </p>
+
+        </div>
+
+
+        <div class="text-block">
+
+            <strong>
+                Narration
+            </strong>
+
+            <p>
+                {{ panel.narration }}
+            </p>
+
+        </div>
+
+
+        {% if panel.dialogue %}
+
+        <div class="text-block">
+
+            <strong>
+                Dialogue
+            </strong>
+
+            <p>
+                "{{ panel.dialogue }}"
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <details>
+
+            <summary>
+                Image prompt reference
+            </summary>
+
+            <p>
+                {{ panel.image_prompt }}
+            </p>
+
+        </details>
+
+
+    </div>
+
+
+</article>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
