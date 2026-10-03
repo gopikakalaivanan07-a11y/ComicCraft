@@ -6,6 +6,7 @@ def build_comic_layout(
     image_paths: list[str],
 ) -> list[dict]:
 
+
     if len(story_panels) != len(image_paths):
 
         raise ValueError(
